@@ -6,42 +6,29 @@ const {
   createProductSchema,
   updateProductSchema,
   getProductSchema,
+  queryProductSchema,
 } = require('../schemas/product.schema');
+
 const service = new ProductsService();
-/*
-  GET
-  Recibe información del servidor,
-  se puede limitar la cantidad de información
-  que se muestre al usuario
-  - send: envia el mensaje en formato texto
-  - json: envia el mensaje en formato JSON
-  Todas las rutas que son fijas ('/') deben ir por encima
-  de las rutas dinamicas ('/:') para evitar conflictos.
-  Se pueden recibir la cantidad necesaria de parametros,
-  los parametros son identificados con /:id (puede ser cualquier nombre).
 
-  POST
-  Envia información al servidor desde la keyword 'data' y enviamos un
-  mensaje con la keyword 'message'.
+// router.get('/', async (req, res) => {
+//   const products = await service.find();
+//   res.json(products);
+// });
 
-  PUT y PATCH
-  PUT actualiza todo el documento y necesita que todos los elementos
-  esten contenidos en la información, mientras que PATCH solo cambia los elementos
-  signados.
-  Necesita paranetros para poder funcionar.
+router.get(
+  '/',
+  validatorHandler(queryProductSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const newProduct = await service.find(req.query);
+      res.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-  DELETE
-  Elimina la información en el servidor.
-  Necesita paranetros para poder funcionar.
-*/
-
-// Already
-router.get('/', async (req, res) => {
-  const products = await service.find();
-  res.json(products);
-});
-
-// Already
 router.post(
   '/',
   validatorHandler(createProductSchema, 'body'),
@@ -56,7 +43,6 @@ router.post(
   }
 );
 
-// Already
 router.get(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
@@ -71,7 +57,6 @@ router.get(
   }
 );
 
-// Already
 router.patch(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
@@ -88,19 +73,14 @@ router.patch(
   }
 );
 
-// Already
 router.delete(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const answer = await service.delete(id);
-      res.json(answer);
-      res.json({
-        message: 'deleted',
-        id,
-      });
+      const response = await service.delete(id);
+      res.json(response);
     } catch (error) {
       next(error);
     }

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-
 const UsersService = require('../services/user.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {
@@ -8,15 +7,14 @@ const {
   updateUserSchema,
   getUserSchema,
 } = require('../schemas/user.schema');
+
 const service = new UsersService();
 
-// Already
 router.get('/', async (req, res) => {
   const users = await service.find();
   res.json(users);
 });
 
-// Already
 router.post(
   '/',
   validatorHandler(createUserSchema, 'body'),
@@ -31,7 +29,6 @@ router.post(
   }
 );
 
-// Already
 router.get(
   '/:id',
   validatorHandler(getUserSchema, 'params'),
@@ -46,7 +43,6 @@ router.get(
   }
 );
 
-// Already
 router.patch(
   '/:id',
   validatorHandler(getUserSchema, 'params'),
@@ -63,15 +59,14 @@ router.patch(
   }
 );
 
-// Already
 router.delete(
   '/:id',
   validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const answer = await service.delete(id);
-      res.json(answer);
+      const response = await service.delete(id);
+      res.json(response);
     } catch (error) {
       next(error);
     }

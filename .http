@@ -1,0 +1,85 @@
+# USERS
+GET http://localhost:3000/api/v1/users
+###
+GET http://localhost:3000/api/v1/users/1
+
+# CUSTOMERS
+###
+GET http://localhost:3000/api/v1/customers
+###
+POST http://localhost:3000/api/v1/customers
+Content-Type: application/json
+
+{
+  "name": "Katherine",
+    "lastName": "Gonzalez",
+    "phone": "70667463",
+    "user": {
+        "nickname": "kathygbcr",
+        "email": "customer@mail.com",
+        "password": "1234567890"
+    }
+}
+###
+
+# CATEGORIES
+###
+GET http://localhost:3000/api/v1/categories
+###
+POST http://localhost:3000/api/v1/categories
+Content-Type: application/json
+
+{
+  "name": "bebidas",
+  "image": "https://i.postimg.cc/logo-category/pizza.png"
+}
+###
+
+# PRODUCTS
+###
+GET http://localhost:3000/api/v1/products
+###
+POST http://localhost:3000/api/v1/products
+Content-Type: application/json
+
+{
+    "name": "te frio",
+    "description": "natural bebida creada des casa",
+    "image": "https://i.postimg.cc/Qt4123w4/te-frio.png",
+    "price": 10,
+    "stock": 0,
+    "categoryId": 2
+}
+###
+
+# ORDERS
+###
+GET http://localhost:3000/api/v1/orders
+###
+POST http://localhost:3000/api/v1/orders
+Content-Type: application/json
+
+{
+    "customerId": 1,
+    "orderStatus": "pendiente",
+    "orderDetail": "local",
+    "paymentMethod": "cash"
+}
+###
+GET http://localhost:3000/api/v1/orders/1
+###
+POST http://localhost:3000/api/v1/orders/add-item
+Content-Type: application/json
+
+{
+    "orderId": 1,
+    "productId": 1,
+    "amount": 1
+}
+###
+DELETE http://localhost:3000/api/v1/orders/remove-item
+# Content-Type: application/json
+
+{
+    "productId": 1
+}
