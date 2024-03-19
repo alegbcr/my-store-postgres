@@ -3,12 +3,12 @@ const { config } = require('../../../config/config');
 
 let URI = '';
 
-if (!config.isProd) {
+if (config.isProd) {
+  URI = config.dbRnderUrl;
+} else {
   const USER = encodeURIComponent(config.dbUser);
   const PASSWORD = encodeURIComponent(config.dbPassword);
   URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
-} else {
-  URI = config.dbUrl;
 }
 
 const pool = new Pool({ connectionString: URI });
