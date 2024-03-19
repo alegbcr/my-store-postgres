@@ -48,18 +48,18 @@ const OrderSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
   },
-  total: {
-    type: DataTypes.VIRTUAL,
-    get() {
-      if (this.items) {
-        return this.items.reduce(
-          (total, item) => total + item.price * item.OrderProduct.amount,
-          0
-        );
-      }
-      return 0;
-    },
-  },
+  // total: {
+  //   type: DataTypes.VIRTUAL,
+  //   get() {
+  //     if (this.items) {
+  //       return this.items.reduce(
+  //         (total, item) => total + item.price * item.OrderProduct.amount,
+  //         0
+  //       );
+  //     }
+  //     return 0;
+  //   },
+  // },
 };
 
 class Order extends Model {
