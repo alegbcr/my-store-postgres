@@ -11,7 +11,6 @@ const {
 
 // Inicio del proyecto
 const app = express();
-const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -37,6 +36,6 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 // app Listener
-app.listen(port, () => {
-  console.log(`I'm listening on port ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`I'm listening on port 3000`);
 });
