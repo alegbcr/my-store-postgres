@@ -8,6 +8,7 @@ const {
   boomErrorHandler,
   ormErrorHandler,
 } = require('./middlewares/error.handler');
+const { config } = require('../../config/config');
 
 // Inicio del proyecto
 const app = express();
@@ -37,5 +38,7 @@ app.use(errorHandler);
 
 // app Listener
 app.listen(process.env.PORT, () => {
-  console.log(`I'm listening on port 3000`);
+  console.log(
+    `I'm listening on port 3000 & the enviroment is ${config.env} ${config.isProd}`
+  );
 });

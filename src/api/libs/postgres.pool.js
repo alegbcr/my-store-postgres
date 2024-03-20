@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const { config } = require('../../../config/config');
 
-let URI = '';
+let URI;
 
 if (config.isProd) {
   URI = config.dbRnderUrl;
