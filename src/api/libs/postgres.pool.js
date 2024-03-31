@@ -4,7 +4,7 @@ const { config } = require('../../../config/config');
 let URI;
 
 if (config.isProd) {
-  URI = config.dbRnderUrl;
+  URI = config.dbUrl;
 } else {
   const USER = encodeURIComponent(config.dbUser);
   const PASSWORD = encodeURIComponent(config.dbPassword);
